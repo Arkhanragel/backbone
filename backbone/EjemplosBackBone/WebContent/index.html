@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<!-- 
+			o El bloque head debe ser el encargado de reunir todas las inclusiones de archivos javascript y hojas de estilos
+			
+			o Nunca debe de incluirse un archivo externo de internet, nunca se sabe que tipo 
+			de restricciones de acceso puede tener el cliente... 
+		-->
+		
+		
+		
+		<script src="lib/jquery-1.11.3.min.js"></script>
+		<script src="lib/underscore.js"></script>
+		<script src="lib/backbone.js"></script>
+		
+		<!-- Views -->
+		<script src="views/indexView.js"></script>
+		<script src="views/newsView.js"></script>
+		<script src="views/songView.js"></script>
+		<!-- Models -->
+		<script src="models/song.js"></script>
+		
+		<script src="js/router.js"></script>
+		<script src="js/init.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		
+		
+		
+	</head>
+	<body>
+		<div id="header">
+			<span>
+				Formación BackboneJS
+			</span>
+		</div>
+		<div id="content">
+		</div>
+		<div id="footer">
+			Pie de página
+		</div>
+		<!-- Templates -->
+		<script type="text/template" id="indexViewTemplate">
+			<div> Hello <%- name %> </div>
+			<a href="#news"><%- i18n.seeNews %></a>
+            <a href="#songs"><%- i18n.seeSongs %></a>
+		</script>
+		<script type="text/template" id="newsViewTemplate">
+			<div> Hello <%- name %> </div>
+            <a href="#index"><%- i18n.backHome %></a>
+		</script>
+		<script type="text/template" id="songsViewTemplate">
+            <div> Cancion: <%- titulo %> </div>
+            <div> Género: <%- genero %> </div>
+                <a href="#index"><%- i18n.backHome %></a>
+        </script>
+	</body>
+</html>
