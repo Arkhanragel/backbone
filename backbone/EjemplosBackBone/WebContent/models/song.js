@@ -3,6 +3,9 @@ var Song = Backbone.Model.extend({
     url : '/api/song/',
     defaults : {
         title : '',
+        artist: '',
         genre : 'Heavy',
+        listeners: 0,
+        reprods: 0
     }
 });

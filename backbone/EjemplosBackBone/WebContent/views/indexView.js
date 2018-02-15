@@ -5,7 +5,8 @@ $(function() {
 		html : '',
 		i18n : {
 			'seeNews' : 'Ver Novedades',
-			'seeSongs': 'Ver canciones'
+			'seeSong': 'Ver cancion',
+			'seeSongs': 'Ver canciones',
 		},
 		/* 
 		 *  initialize(): Automatically called upon instantiation. Where you make all types of

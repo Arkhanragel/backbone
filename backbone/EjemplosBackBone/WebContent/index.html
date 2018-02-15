@@ -1,59 +1,75 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<!-- 
+<head>
+<!-- 
 			o El bloque head debe ser el encargado de reunir todas las inclusiones de archivos javascript y hojas de estilos
 			
 			o Nunca debe de incluirse un archivo externo de internet, nunca se sabe que tipo 
 			de restricciones de acceso puede tener el cliente... 
 		-->
-		
-		
-		
-		<script src="lib/jquery-1.11.3.min.js"></script>
-		<script src="lib/underscore.js"></script>
-		<script src="lib/backbone.js"></script>
-		
-		<!-- Views -->
-		<script src="views/indexView.js"></script>
-		<script src="views/newsView.js"></script>
-		<script src="views/songView.js"></script>
-		<!-- Models -->
-		<script src="models/song.js"></script>
-		
-		<script src="js/router.js"></script>
-		<script src="js/init.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		
-		
-		
-	</head>
-	<body>
-		<div id="header">
-			<span>
-				Formación BackboneJS
-			</span>
-		</div>
-		<div id="content">
-		</div>
-		<div id="footer">
-			Pie de página
-		</div>
-		<!-- Templates -->
-		<script type="text/template" id="indexViewTemplate">
+
+
+<script src="lib/jquery-1.11.3.min.js"></script>
+<script src="lib/underscore.js"></script>
+<script src="lib/backbone.js"></script>
+<script src="js/router.js"></script>
+
+<!-- Models -->
+<script src="models/song.js"></script>
+
+<!-- Collections -->
+<script src="collections/songs.js"></script>
+
+<!-- Views -->
+<script src="views/indexView.js"></script>
+<script src="views/newsView.js"></script>
+<script src="views/songView.js"></script>
+<script src="views/songsView.js"></script>
+
+
+<script src="js/init.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+
+</head>
+<body>
+	<div id="header">
+		<span> Formación BackboneJS </span>
+	</div>
+	<div id="content"></div>
+	<div id="footer">Pie de página</div>
+	<!-- Templates -->
+	<script type="text/template" id="indexViewTemplate">
 			<div> Hello <%- name %> </div>
 			<a href="#news"><%- i18n.seeNews %></a>
             <a href="#songs"><%- i18n.seeSongs %></a>
+            <a href="#song"><%- i18n.seeSong %></a>
 		</script>
-		<script type="text/template" id="newsViewTemplate">
+	<script type="text/template" id="newsViewTemplate">
 			<div> Hello <%- name %> </div>
             <a href="#index"><%- i18n.backHome %></a>
 		</script>
-		<script type="text/template" id="songsViewTemplate">
-            <div> Cancion: <%- titulo %> </div>
-            <div> Género: <%- genero %> </div>
-                <a href="#index"><%- i18n.backHome %></a>
+	<script type="text/template" id="songViewTemplate">
+            <ul>
+            <li> Cancion: <%= titulo %> </li>
+            <li> Artista: <%= artista %> </li>
+            <li> Género: <%= genero %> </li>
+            <li> Escuchando: <%- escuchando %> </li>
+            <% if(reproducciones > 100) { %>
+                 <span class="popular"> Popular </span>
+              <%  } %>     
+            <br />  
+            </ul>
         </script>
-	</body>
+	<script type="text/template" id="songsViewTemplate">
+            <h1> Canciones </h1>
+            <div> <%- canciones %> </div>
+            <a href="#index"><%- i18n.backHome %></a>
+        </script>
+
+
+</body>
 </html>
