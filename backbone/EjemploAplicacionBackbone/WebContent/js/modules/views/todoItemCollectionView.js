@@ -2,8 +2,8 @@ define([ 'modules/core/itxBus', 'backbone', 'modules/views/todoItemView',
         'modules/models/todoItemModel' ], function(ItxBus, Backbone,
         TodoItemView, TodoItem) {
 
-    var TodoItemCollectionView = Backbone.View.extend({
-
+    return Backbone.View.extend({
+        ids : 2,
         tagName : "ul",
         id : "todoItems",
         initialize : function(options) {
@@ -12,7 +12,6 @@ define([ 'modules/core/itxBus', 'backbone', 'modules/views/todoItemView',
             }
 
             this.model.on("add", this.onAddTodoItem, this);
-            // this.model.on("remove", this.onRemoveTodoItem, this);
             this.listenTo(ItxBus, 'seleccionarItem:eliminarItem',
                     this.onRemoveTodoItem);
         },
@@ -24,35 +23,35 @@ define([ 'modules/core/itxBus', 'backbone', 'modules/views/todoItemView',
             });
             this.$el.append(view.render().$el);
         },
-        onRemoveTodoItem : function() {
+        onRemoveTodoItem : function(todoItem) {
+            console.log(todoItem);
+            this.model.remove(todoItem);
             this.$el.empty();
             this.render();
         },
         events : {
             "click #add" : "onClickAdd"
         },
+        getIdValido : function() {
 
-        // onClickRemove : function(e){
-        // e.preventDefault(); //Good practice for button clicks
-        // var id = $(e.currentTarget).data('id');
-        // this.model.remove(id);
-        // },
+            this.ids = this.ids + 1;
+            return this.ids;
+        },
 
-        onClickAdd : function(e) {
+        onClickAdd : function() {
             var self = this;
             var $textBox = self.$("#newTodoItem");
+            var todoItem;
             if ($textBox.val() != '') {
-                var todoItem = new TodoItem({
+                todoItem = new TodoItem({
                     description : $textBox.val(),
-                    identificador : self.model.length + 1,
-                    id : self.model.length
+                    id : this.getIdValido()
                 });
                 $textBox.val('');
             } else {
-                var todoItem = new TodoItem({
+                todoItem = new TodoItem({
                     description : "TodoItem " + (self.model.length + 2),
-                    identificador : self.model.length + 1,
-                    id : self.model.length
+                    id : this.getIdValido()
                 });
             }
 
@@ -75,6 +74,6 @@ define([ 'modules/core/itxBus', 'backbone', 'modules/views/todoItemView',
             return this;
         }
     });
-    return TodoItemCollectionView;
+    // return TodoItemCollectionView;
 
 });
