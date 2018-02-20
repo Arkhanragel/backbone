@@ -1,20 +1,22 @@
 define([ 'backbone' ], function(Backbone) {
 
-    var TodoItem = Backbone.Model.extend({
+    return Backbone.Model.extend({
 
         idAttribute : "id",
+        urlRoot : "/api/item",
         defaults : {
-            id : ''
+            id : '',
+            descripccion: ''
         },
         validate : function(attrs) {
-            if (!attr.description) {
+            if ( attr.description && attr.description != '' ) {
                 return "Se requiere descripccion";
             }
-            if (!attr.id) {
+            if (!attr.id  && attr.id != '') {
                 return "Se requiere id";
             }
         }
     });
-    return TodoItem;
+    
 
 });
