@@ -1,12 +1,11 @@
 
 define(['modules/core/itxBus', 'backbone'], function(ItxBus,Backbone){
-    var TodoItemView = Backbone.View.extend({
+    return Backbone.View.extend({
         tagName : "li",
         initialize : function(options) {
             if (!(options && options.model)) {
                 throw new Error("model TodoItem not specified");
             }
-            this.on('remove', this.lanzaEvento);
         },
         events : {
             "click #remove" : "onClickRemove"
@@ -14,22 +13,18 @@ define(['modules/core/itxBus', 'backbone'], function(ItxBus,Backbone){
         render : function() {
             this.$el.html(this.model.get("description"));
             this.$el.append("<button id='remove' data-id="
-                    + this.model.get('identificador') + ">Eliminar</button>")
+                    + this.model.get('id') + ">Eliminar</button>")
             return this;
         },
         onClickRemove : function(e){
-            e.preventDefault(); //Good practice for button clicks
+            e.preventDefault(); // Good practice for button clicks
             if(this.model){
-                this.remove();
+                ItxBus.trigger('seleccionarItem:eliminarItem', this.model);
             }
-        },
-        
-        lanzaEvento: function(){
-            ItxBus.trigger('seleccionarItem:eliminarItem');
         }
     });
     
-    return TodoItemView;
+    // return TodoItemView;
     
 });
 
